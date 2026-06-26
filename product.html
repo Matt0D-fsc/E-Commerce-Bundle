@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product — Maison Ismahal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .product-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    padding-top: 90px;
+    background: var(--alabaster);
+  }
+  .product-visual {
+    position: relative;
+    background: var(--espresso);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .product-info {
+    padding: 80px 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .product-tag {
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--saddle); font-weight: 400; margin-bottom: 24px;
+  }
+  .product-title {
+    font-family: var(--serif); font-size: 52px; font-style: italic;
+    color: var(--espresso); line-height: 1.1; margin-bottom: 16px;
+  }
+  .product-price {
+    font-family: var(--serif); font-size: 28px; color: var(--espresso);
+    margin-bottom: 48px;
+  }
+  .product-desc {
+    font-size: 13px; line-height: 1.8; color: var(--muted);
+    font-weight: 300; margin-bottom: 48px;
+    max-width: 480px;
+  }
+  .product-details {
+    list-style: none; padding: 0; margin-bottom: 56px;
+    border-top: 1px solid rgba(139,92,42,0.15);
+    padding-top: 24px;
+  }
+  .product-details li {
+    font-size: 11px; letter-spacing: 0.1em; color: var(--charcoal);
+    margin-bottom: 12px; display: flex; align-items: center; gap: 12px;
+  }
+  .product-details li::before {
+    content: ''; width: 4px; height: 4px; background: var(--saddle); border-radius: 50%;
+  }
+  .size-selector {
+    margin-bottom: 40px;
+  }
+  .size-label {
+    font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--espresso); display: block; margin-bottom: 16px;
+  }
+  .size-grid {
+    display: flex; gap: 12px;
+  }
+  .size-btn {
+    width: 48px; height: 48px; border: 1px solid rgba(139,92,42,0.3);
+    background: transparent; color: var(--espresso);
+    font-family: var(--sans); font-size: 12px; cursor: none;
+    transition: all 0.3s ease;
+  }
+  .size-btn:hover { border-color: var(--saddle); }
+  .size-btn.selected { background: var(--saddle); color: var(--cream); border-color: var(--saddle); }
+  
+  .add-to-cart-large {
+    padding: 24px 48px;
+    background: var(--espresso); color: var(--cream);
+    border: none; cursor: none; width: 100%; max-width: 400px;
+    font-family: var(--sans); font-size: 11px;
+    letter-spacing: 0.3em; text-transform: uppercase; font-weight: 400;
+    transition: background 0.4s;
+  }
+  .add-to-cart-large:hover { background: var(--oxblood); }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">Maison <span>Ismahal</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#collections">Collections</a></li>
+    <li><a href="index.html#craft">Atelier</a></li>
+    <li><a href="index.html#editorial">Boutique</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="cart-btn" onclick="openCart()">
+      Atelier Cart
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<div class="product-layout" id="productContainer">
+  <div class="product-visual">
+    <img id="pdImage" src="" class="img-luxe" style="opacity:1" alt="">
+    <div class="img-overlay-gradient"></div>
+  </div>
+  <div class="product-info reveal visible">
+    <div class="product-tag" id="pdTag"></div>
+    <h1 class="product-title" id="pdName"></h1>
+    <div class="product-price" id="pdPrice"></div>
+    <p class="product-desc" id="pdDesc"></p>
+    
+    <ul class="product-details" id="pdDetails"></ul>
+    
+    <div class="size-selector" id="sizeSelector" style="display:none;">
+      <span class="size-label">Select Size (EU)</span>
+      <div class="size-grid">
+        <button class="size-btn">40</button>
+        <button class="size-btn">41</button>
+        <button class="size-btn selected">42</button>
+        <button class="size-btn">43</button>
+        <button class="size-btn">44</button>
+      </div>
+    </div>
+    
+    <button class="add-to-cart-large" id="addToCartBtn">Add to Atelier</button>
+  </div>
+</div>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay" onclick="handleOverlayClick(event)">
+  <div class="cart-panel">
+    <div class="cart-header">
+      <h2 class="cart-title">Il Tuo Atelier</h2>
+      <button class="cart-close" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total-amount" id="cartTotal">€ 0</span>
+      </div>
+      <button class="checkout-btn" onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get('id');
+    const product = getProductById(productId);
+    
+    if (!product) {
+      window.location.href = 'index.html';
+      return;
+    }
+    
+    document.title = product.name + " — Maison Ismahal";
+    document.getElementById('pdImage').src = product.image;
+    document.getElementById('pdName').textContent = product.name;
+    document.getElementById('pdTag').textContent = product.tag;
+    document.getElementById('pdPrice').textContent = '€ ' + product.price.toLocaleString('de-DE');
+    document.getElementById('pdDesc').textContent = product.description;
+    
+    const detailsList = document.getElementById('pdDetails');
+    product.details.forEach(d => {
+      const li = document.createElement('li');
+      li.textContent = d;
+      detailsList.appendChild(li);
+    });
+    
+    // Show size selector for shoes (derby, loafer, brogue)
+    let selectedSize = '42';
+    if (['derby', 'loafer', 'brogue'].includes(product.id)) {
+      document.getElementById('sizeSelector').style.display = 'block';
+      const btns = document.querySelectorAll('.size-btn');
+      btns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          btns.forEach(b => b.classList.remove('selected'));
+          e.target.classList.add('selected');
+          selectedSize = e.target.textContent;
+        });
+      });
+    } else {
+      selectedSize = 'One Size';
+    }
+    
+    document.getElementById('addToCartBtn').addEventListener('click', () => {
+      const meta = ['derby', 'loafer', 'brogue'].includes(product.id) ? `Size ${selectedSize} EU` : selectedSize;
+      addToCart(product.id, meta);
+    });
+  });
+</script>
+</body>
+</html>

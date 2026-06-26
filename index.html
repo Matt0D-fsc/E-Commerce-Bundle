@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maison Ismahal — Milano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="has-dark-hero">
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">Maison <span>Ismahal</span></a>
+  <ul class="nav-links">
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#craft">Atelier</a></li>
+    <li><a href="#editorial">Boutique</a></li>
+    <li><a href="#provenance">Maison</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button>Account</button>
+    <button class="cart-btn" onclick="openCart()">
+      Atelier Cart
+      <span class="cart-count" id="cartCount">2</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <div class="hero-texture"></div>
+    <div style="position:relative;z-index:1">
+      <p class="hero-eyebrow">Milano · Firenze · Napoli — Est. MMXII</p>
+      <h1 class="hero-title">
+        Crafted<br>
+        <em>by hand,</em>
+        worn for<br>
+        generations.
+      </h1>
+      <p class="hero-subtitle">
+        Each piece emerges from the same Florentine ateliers that dressed 
+        the <strong style="color:var(--tan);font-weight:400">Medici</strong>. 
+        Full-grain leather selected by our maestri, 
+        stitched with <strong style="color:var(--tan);font-weight:400">linen thread</strong> 
+        in the Goodyear tradition.
+      </p>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="document.getElementById('collections').scrollIntoView({behavior:'smooth'})">
+          Discover the Collection
+        </button>
+        <button class="btn-ghost" onclick="document.getElementById('craft').scrollIntoView({behavior:'smooth'})">
+          Our Atelier
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-img-main" style="background: var(--espresso); position: relative;">
+      <img src="assets/hero_derby.png" alt="Il Derby Fiorentino" class="img-luxe" style="object-fit: cover;">
+      <div class="img-overlay-gradient"></div>
+      
+      <!-- Hotspots -->
+      <div class="hotspot" style="top: 60%; left: 35%;">
+        <div class="hotspot-card">
+          <div class="hotspot-title">Florentine Calfskin</div>
+          <div class="hotspot-desc">Hand-selected full-grain calfskin, vegetable tanned in Santa Croce sull'Arno for a rich, breathing patina.</div>
+        </div>
+      </div>
+      <div class="hotspot" style="top: 75%; left: 55%;">
+        <div class="hotspot-card">
+          <div class="hotspot-title">Goodyear Welt</div>
+          <div class="hotspot-desc">240 hand-locked stitches bind the upper, welt, and insole, ensuring a lifetime of resoling.</div>
+        </div>
+      </div>
+      <div class="hotspot" style="top: 45%; left: 45%;">
+        <div class="hotspot-card">
+          <div class="hotspot-title">Waxed Linen Thread</div>
+          <div class="hotspot-desc">Natural linen thread, hand-waxed by our Neapolitan maestri for unparalleled strength and elegance.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-label">
+      <div class="hero-label-title">Il Derby Fiorentino</div>
+      <div class="hero-label-sub">Full-Grain Florentine Calfskin · Goodyear Welt</div>
+      <div class="hero-label-price">€ 895</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span class="marquee-item">Full-Grain Florentine Leather</span>
+    <span class="marquee-item">Goodyear Welt Construction</span>
+    <span class="marquee-item">Hand-Stitched in Napoli</span>
+    <span class="marquee-item">Vegetable-Tanned Patina</span>
+    <span class="marquee-item">Made in Italia</span>
+    <span class="marquee-item">Full-Grain Florentine Leather</span>
+    <span class="marquee-item">Goodyear Welt Construction</span>
+    <span class="marquee-item">Hand-Stitched in Napoli</span>
+    <span class="marquee-item">Vegetable-Tanned Patina</span>
+    <span class="marquee-item">Made in Italia</span>
+  </div>
+</div>
+
+<!-- COLLECTIONS -->
+<section class="collections" id="collections">
+  <div class="section-header reveal">
+    <div>
+      <p class="section-eyebrow">La Collezione — AW 2025</p>
+      <h2 class="section-title">Where leather<br><em>becomes legend</em></h2>
+    </div>
+    <a href="#" class="section-link">View All Pieces</a>
+  </div>
+
+  <div class="collections-grid">
+    <!-- Feature card -->
+    <div class="coll-card reveal">
+      <div class="coll-visual" style="height:680px">
+        <a href="product.html?id=derby" style="display:contents">
+          <img src="assets/hero_derby.png" alt="Il Derby Fiorentino" class="img-luxe">
+          <div class="img-overlay-gradient"></div>
+        </a>
+        <div class="coll-info">
+          <div class="coll-meta">La Collezione Principale · Oxford</div>
+          <div class="coll-name">Il Derby Fiorentino</div>
+          <div class="coll-price">€ 895</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loafer -->
+    <div class="coll-card reveal reveal-delay-1">
+      <div class="coll-visual">
+        <a href="product.html?id=loafer" style="display:contents">
+          <img src="assets/loafer_romano.png" alt="Il Morsetto Romano" class="img-luxe">
+          <div class="img-overlay-gradient"></div>
+        </a>
+        <div class="coll-info">
+          <div class="coll-meta">Penny Loafer · Vitello</div>
+          <div class="coll-name">Il Morsetto Romano</div>
+          <div class="coll-price">€ 720</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Belt -->
+    <div class="coll-card reveal reveal-delay-2">
+      <div class="coll-visual">
+        <a href="product.html?id=belt" style="display:contents">
+          <img src="assets/cintura_milano.png" alt="La Cintura Milano" class="img-luxe">
+          <div class="img-overlay-gradient"></div>
+        </a>
+        <div class="coll-info">
+          <div class="coll-meta">Cintura · Full-Grain</div>
+          <div class="coll-name">La Cintura Milano</div>
+          <div class="coll-price">€ 285</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weekender -->
+    <div class="coll-card reveal reveal-delay-1">
+      <div class="coll-visual">
+        <a href="product.html?id=weekender" style="display:contents">
+          <img src="assets/weekender_bag.png" alt="Il Viaggio Veneziano" class="img-luxe">
+          <div class="img-overlay-gradient"></div>
+        </a>
+        <div class="coll-info">
+          <div class="coll-meta">Borsa da Viaggio · Cuoio</div>
+          <div class="coll-name">Il Viaggio Veneziano</div>
+          <div class="coll-price">€ 1,480</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Brogue -->
+    <div class="coll-card reveal reveal-delay-2">
+      <div class="coll-visual">
+        <a href="product.html?id=brogue" style="display:contents">
+          <img src="assets/brogue_shoe.png" alt="Il Brogue Britannico" class="img-luxe">
+          <div class="img-overlay-gradient"></div>
+        </a>
+        <div class="coll-info">
+          <div class="coll-meta">Full Brogue · Vitello Verde</div>
+          <div class="coll-name">Il Brogue Britannico</div>
+          <div class="coll-price">€ 945</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROVENANCE -->
+<section class="provenance" id="provenance">
+  <div class="prov-left">
+    <p class="prov-eyebrow reveal">L'Arte del Cuoio</p>
+    <h2 class="prov-title reveal">Born in the<br><em>tanneries</em><br>of Tuscany.</h2>
+    <p class="prov-body reveal reveal-delay-1">
+      The journey of every Maison Ismahal piece begins in the <strong>Santa Croce sull'Arno</strong> district of Tuscany — the most celebrated leather-producing region on earth. Our hides are sourced from <strong>a single, third-generation tannery</strong>, selected for their commitment to the ancient art of vegetable tanning.
+    </p>
+    <p class="prov-body reveal reveal-delay-1" style="margin-top:12px">
+      This centuries-old process uses natural tannins — oak bark, chestnut, quebracho — instead of chromium. It takes <strong>sixty days</strong> instead of one. The result is a leather that breathes, molds to your foot, and develops a patina uniquely yours.
+    </p>
+    <div class="prov-stats reveal reveal-delay-2">
+      <div class="stat-block">
+        <div class="stat-num">60</div>
+        <div class="stat-label">Days to tan each hide</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">240</div>
+        <div class="stat-label">Hand stitches per shoe</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Generations of craft</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="prov-right">
+    <!-- Provenance Image -->
+    <img src="assets/tuscany_leather.png" alt="Tuscan Leather Tannery" class="img-luxe" style="position: absolute; inset: 0;">
+    <div class="img-overlay-gradient"></div>
+  </div>
+</section>
+
+<!-- EDITORIAL / BOUTIQUE -->
+<section class="editorial" id="editorial">
+  <div class="editorial-intro">
+    <p class="section-eyebrow reveal">La Boutique</p>
+    <h2 class="section-title reveal">Every piece,<br><em>a narrative.</em></h2>
+    <p class="craft-body reveal" style="margin-top:20px">
+      We don't sell shoes. We offer heirlooms with appointment times. Each model carries a story — a geography, a technique, a name that means something.
+    </p>
+  </div>
+
+  <div class="editorial-scroll">
+    <div class="ed-card">
+      <div class="ed-visual bg-derby">
+        <img src="assets/hero_derby.png" alt="Il Derby Fiorentino" class="img-luxe" style="position:absolute;inset:0;">
+      </div>
+      <div class="ed-card-info">
+        <div class="ed-tag">Oxford · Full-Grain Calfskin · Goodyear Welt</div>
+        <div class="ed-name">Il Derby<br>Fiorentino</div>
+        <div class="ed-sub">Firenze · Handcrafted 2025</div>
+        <div class="ed-footer">
+          <div class="ed-price">€ 895</div>
+          <button class="add-btn" onclick="addToCart('derby')">Add to Atelier</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ed-card">
+      <div class="ed-visual bg-loafer">
+        <img src="assets/loafer_romano.png" alt="Il Morsetto Romano" class="img-luxe" style="position:absolute;inset:0;">
+      </div>
+      <div class="ed-card-info">
+        <div class="ed-tag">Horsebit Loafer · Vitello Liscio</div>
+        <div class="ed-name">Il Morsetto<br>Romano</div>
+        <div class="ed-sub">Roma · Handcrafted 2025</div>
+        <div class="ed-footer">
+          <div class="ed-price">€ 720</div>
+          <button class="add-btn" onclick="addToCart('loafer')">Add to Atelier</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ed-card">
+      <div class="ed-visual bg-brogue">
+        <img src="assets/brogue_shoe.png" alt="Il Brogue Britannico" class="img-luxe" style="position:absolute;inset:0;">
+      </div>
+      <div class="ed-card-info">
+        <div class="ed-tag">Full Brogue · Vitello Verde Inglese</div>
+        <div class="ed-name">Il Brogue<br>Britannico</div>
+        <div class="ed-sub">Napoli · Handcrafted 2025</div>
+        <div class="ed-footer">
+          <div class="ed-price">€ 945</div>
+          <button class="add-btn" onclick="addToCart('brogue')">Add to Atelier</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ed-card">
+      <div class="ed-visual bg-weekender">
+        <img src="assets/weekender_bag.png" alt="Il Viaggio Veneziano" class="img-luxe" style="position:absolute;inset:0;">
+      </div>
+      <div class="ed-card-info">
+        <div class="ed-tag">Borsa Weekender · Cuoio Naturale</div>
+        <div class="ed-name">Il Viaggio<br>Veneziano</div>
+        <div class="ed-sub">Venezia · Handcrafted 2025</div>
+        <div class="ed-footer">
+          <div class="ed-price">€ 1,480</div>
+          <button class="add-btn" onclick="addToCart('weekender')">Add to Atelier</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CRAFT -->
+<section class="craft" id="craft">
+  <div class="craft-visual">
+    <div class="craft-main-img">
+      <img src="assets/atelier_craft.png" alt="Master Craftsman" class="img-luxe" style="position:absolute;inset:0;">
+      <div class="img-overlay-gradient"></div>
+    </div>
+    <div class="craft-accent">
+      <div class="craft-quote">
+        "La pelle non mente.<br>Ogni segno è una storia."
+        <cite>— Marco Ferrante, Maestro Calzolaio, Napoli</cite>
+      </div>
+    </div>
+  </div>
+
+  <div class="craft-content">
+    <p class="section-eyebrow reveal">L'Atelier Ismahal</p>
+    <h2 class="craft-title reveal">The old way<br>is the <em>only way</em>.</h2>
+    <p class="craft-body reveal">
+      Our workshop in <strong>Via dei Tribunali, Napoli</strong> has been producing hand-lasted footwear since our founding maestro, Salvatore Ismahal, apprenticed under the great <strong>Vincenzo Tramontano</strong> in the 1970s.
+    </p>
+    <p class="craft-body reveal reveal-delay-1">
+      We still use his original <strong>wooden lasts</strong> — turned from hornbeam, seasoned for a decade, shaped to the proportions of the ideal Neapolitan foot. We produce fewer than <strong>800 pairs per year</strong>. Every single one is signed.
+    </p>
+
+    <div class="craft-steps reveal reveal-delay-2">
+      <div class="craft-step">
+        <div class="step-num">01</div>
+        <div class="step-info">
+          <div class="step-title">Leather Selection & Skiving</div>
+          <div class="step-desc">Each hide is hand-examined, graded, and skived to consistent thickness. Only the central 60% of each hide is used — the choicest grain.</div>
+        </div>
+      </div>
+      <div class="craft-step">
+        <div class="step-num">02</div>
+        <div class="step-info">
+          <div class="step-title">Hand-Lasting to Wooden Forms</div>
+          <div class="step-desc">The upper is wet-lasted over our original hornbeam lasts using bone tools, stretched by hand — never by machine — to perfect the silhouette.</div>
+        </div>
+      </div>
+      <div class="craft-step">
+        <div class="step-num">03</div>
+        <div class="step-info">
+          <div class="step-title">Goodyear Welt Stitching</div>
+          <div class="step-desc">240 stitches of waxed linen thread bind upper, welt, and insole. This single seam allows full resoling — your shoes can outlive you.</div>
+        </div>
+      </div>
+      <div class="craft-step">
+        <div class="step-num">04</div>
+        <div class="step-info">
+          <div class="step-title">Finishing & Patination</div>
+          <div class="step-desc">Each shoe receives seven coats of hand-applied wax and polish, burnished with horsehair brushes and a final chamois cloth. Then, your pair number is stamped in gold.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo" style="font-size:28px;color:var(--alabaster)">Maison <span>Ismahal</span></a>
+      <p class="footer-tagline">
+        "Leather is not a material. It is a memory. It records every step, every journey, every story. We exist to give you something worth remembering."
+      </p>
+    </div>
+    <div>
+      <p class="footer-col-title">Collezione</p>
+      <ul class="footer-links">
+        <li><a href="#">Oxford & Derby</a></li>
+        <li><a href="#">Loafer & Moccasin</a></li>
+        <li><a href="#">Brogue & Wing</a></li>
+        <li><a href="#">Belts & Cinture</a></li>
+        <li><a href="#">Borse da Viaggio</a></li>
+        <li><a href="#">Bespoke Service</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">La Maison</p>
+      <ul class="footer-links">
+        <li><a href="#">Our Atelier</a></li>
+        <li><a href="#">The Maestri</a></li>
+        <li><a href="#">Provenance</a></li>
+        <li><a href="#">Care & Resoling</a></li>
+        <li><a href="#">Stockists</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Servizio</p>
+      <ul class="footer-links">
+        <li><a href="#">Size Guide</a></li>
+        <li><a href="#">Shipping & Returns</a></li>
+        <li><a href="#">Private Appointments</a></li>
+        <li><a href="#">Gift Wrapping</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Maison Ismahal S.r.l. — Milano · Firenze · Napoli — All rights reserved.</p>
+    <p class="footer-made">Crafted with the same patience as our shoes.</p>
+  </div>
+</footer>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay" onclick="handleOverlayClick(event)">
+  <div class="cart-panel">
+    <div class="cart-header">
+      <h2 class="cart-title">Il Tuo Atelier</h2>
+      <button class="cart-close" onclick="closeCart()">✕</button>
+    </div>
+
+    <div class="cart-items" id="cartItems">
+      <div class="cart-item">
+        <div class="cart-item-visual bg-derby" style="aspect-ratio:1">
+          <img src="assets/hero_derby.png" alt="Derby Thumbnail" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div>
+          <div class="cart-item-name">Il Derby Fiorentino</div>
+          <div class="cart-item-meta">Size 43 EU · Cognac Tan</div>
+        </div>
+        <div class="cart-item-price">€ 895</div>
+      </div>
+
+      <div class="cart-item">
+        <div class="cart-item-visual bg-loafer" style="aspect-ratio:1">
+          <img src="assets/loafer_romano.png" alt="Loafer Thumbnail" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div>
+          <div class="cart-item-name">Il Morsetto Romano</div>
+          <div class="cart-item-meta">Size 42 EU · Oxblood</div>
+        </div>
+        <div class="cart-item-price">€ 720</div>
+      </div>
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total — 2 Pieces</span>
+        <span class="cart-total-amount" id="cartTotal">€ 1,615</span>
+      </div>
+      <button class="checkout-btn" onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
+      <p class="cart-note">Complimentary dust bags · Worldwide insured delivery · Certificate of authenticity</p>
+    </div>
+  </div>
+</div>
+
+<script src="js/data.js"></script><script src="js/cart.js"></script><script src="js/app.js"></script>
+</body>
+</html>

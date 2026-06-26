@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — Maison Ismahal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .checkout-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    min-height: 100vh;
+    padding-top: 80px;
+  }
+  .checkout-form-section {
+    background: var(--alabaster);
+    padding: 80px 10%;
+  }
+  .checkout-summary-section {
+    background: var(--cream);
+    padding: 80px 10%;
+    border-left: 1px solid rgba(139,92,42,0.15);
+  }
+  .checkout-title {
+    font-family: var(--serif); font-size: 36px; font-weight: 300;
+    color: var(--espresso); margin-bottom: 40px; font-style: italic;
+  }
+  
+  .form-group { margin-bottom: 24px; }
+  .form-label {
+    display: block; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 8px;
+  }
+  .form-input {
+    width: 100%; padding: 16px; background: transparent;
+    border: 1px solid rgba(139,92,42,0.3);
+    font-family: var(--sans); font-size: 13px; color: var(--espresso);
+    transition: border-color 0.3s;
+    outline: none; cursor: none;
+  }
+  .form-input:focus { border-color: var(--saddle); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .summary-item {
+    display: grid; grid-template-columns: 60px 1fr auto; gap: 16px;
+    align-items: center; margin-bottom: 24px;
+    border-bottom: 1px solid rgba(139,92,42,0.1); padding-bottom: 24px;
+  }
+  .summary-img { width: 60px; height: 60px; object-fit: cover; }
+  .summary-name { font-family: var(--serif); font-size: 16px; font-style: italic; color: var(--espresso); }
+  .summary-meta { font-size: 9px; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; margin-top: 4px; }
+  .summary-price { font-family: var(--serif); font-size: 16px; color: var(--espresso); }
+  
+  .total-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(139,92,42,0.2);
+  }
+  .total-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--saddle); }
+  .total-price { font-family: var(--serif); font-size: 32px; color: var(--espresso); font-weight: 400; }
+  
+  .place-order-btn {
+    width: 100%; padding: 20px; margin-top: 40px;
+    background: var(--espresso); color: var(--cream);
+    border: none; cursor: none;
+    font-family: var(--sans); font-size: 10px;
+    letter-spacing: 0.3em; text-transform: uppercase; font-weight: 400;
+    transition: background 0.4s;
+  }
+  .place-order-btn:hover { background: var(--oxblood); }
+
+  /* Confirmation Modal */
+  .confirm-modal {
+    position: fixed; inset: 0; background: rgba(26,16,8,0.9);
+    backdrop-filter: blur(8px); z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.5s ease;
+  }
+  .confirm-modal.show { opacity: 1; pointer-events: all; }
+  .confirm-box {
+    background: var(--alabaster); padding: 80px 60px;
+    max-width: 500px; text-align: center; border: 1px solid var(--saddle);
+  }
+  .confirm-title { font-family: var(--serif); font-size: 32px; font-style: italic; color: var(--espresso); margin-bottom: 16px; }
+  .confirm-desc { font-size: 12px; line-height: 1.8; color: var(--muted); margin-bottom: 32px; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">Maison <span>Ismahal</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#collections">Collections</a></li>
+    <li><a href="index.html#craft">Atelier</a></li>
+  </ul>
+</nav>
+
+<div class="checkout-layout">
+  <div class="checkout-form-section">
+    <h2 class="checkout-title">Client Details</h2>
+    <form id="checkoutForm" onsubmit="event.preventDefault(); completeCheckout();">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-input" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-input" required>
+      </div>
+      
+      <h2 class="checkout-title" style="margin-top:60px;">Shipping Destination</h2>
+      <div class="form-group">
+        <label class="form-label">Street Address</label>
+        <input type="text" class="form-input" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">City</label>
+          <input type="text" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Postal Code</label>
+          <input type="text" class="form-input" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Country</label>
+        <input type="text" class="form-input" value="Italia" required>
+      </div>
+      
+      <button type="submit" class="place-order-btn">Confirm Order</button>
+    </form>
+  </div>
+  
+  <div class="checkout-summary-section">
+    <h2 class="checkout-title">Your Atelier</h2>
+    <div id="checkoutItemsContainer"></div>
+    <div class="total-row">
+      <span class="total-label">Total Estimate</span>
+      <span class="total-price" id="checkoutTotal">€ 0</span>
+    </div>
+  </div>
+</div>
+
+<div class="confirm-modal" id="confirmModal">
+  <div class="confirm-box">
+    <h2 class="confirm-title">Grazie Mille.</h2>
+    <p class="confirm-desc">Your bespoke order has been received by our Atelier in Napoli. A maestro will review your specifications, and we will update you on the crafting process shortly.</p>
+    <button class="place-order-btn" style="margin-top:0" onclick="window.location.href='index.html'">Return to Maison</button>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('checkoutItemsContainer');
+    let total = 0;
+    
+    if (cartItems.length === 0) {
+      container.innerHTML = '<p style="color:var(--muted);font-size:12px;">Your atelier is empty.</p>';
+    } else {
+      cartItems.forEach(item => {
+        const product = products.find(p => p.id === item.id);
+        if(!product) return;
+        total += product.price;
+        
+        const el = document.createElement('div');
+        el.className = 'summary-item';
+        el.innerHTML = `
+          <img src="${product.image}" class="summary-img">
+          <div>
+            <div class="summary-name">${product.name}</div>
+            <div class="summary-meta">${item.meta}</div>
+          </div>
+          <div class="summary-price">€ ${product.price.toLocaleString('de-DE')}</div>
+        `;
+        container.appendChild(el);
+      });
+    }
+    document.getElementById('checkoutTotal').textContent = '€ ' + total.toLocaleString('de-DE');
+  });
+
+  function completeCheckout() {
+    if (cartItems.length === 0) {
+      alert("Please add items to your atelier first.");
+      return;
+    }
+    clearCart();
+    document.getElementById('confirmModal').classList.add('show');
+  }
+</script>
+</body>
+</html>
