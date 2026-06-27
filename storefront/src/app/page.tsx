@@ -1,6 +1,9 @@
 import Script from 'next/script';
+import { getUnifiedProducts } from '@/lib/products';
 
-export default function Home() {
+export default async function Home() {
+  const products = await getUnifiedProducts();
+
   return (
     <>
       <div className="cursor" id="cursor"></div>
@@ -81,9 +84,9 @@ export default function Home() {
           </div>
 
           <div className="hero-label">
-            <div className="hero-label-title">Il Derby Fiorentino</div>
+            <div className="hero-label-title">{products[0]?.title || 'Il Derby Fiorentino'}</div>
             <div className="hero-label-sub">Full-Grain Florentine Calfskin · Goodyear Welt</div>
-            <div className="hero-label-price">€ 895</div>
+            <div className="hero-label-price">{products[0]?.price || '€ 895'}</div>
           </div>
         </div>
       </section>
@@ -115,75 +118,21 @@ export default function Home() {
         </div>
 
         <div className="collections-grid">
-          <div className="coll-card reveal">
-            <div className="coll-visual" style={{ height: '680px' }}>
-              <a href="/product/derby" style={{ display: 'contents' }}>
-                <img src="/assets/hero_derby.png" alt="Il Derby Fiorentino" className="img-luxe" />
-                <div className="img-overlay-gradient"></div>
-              </a>
-              <div className="coll-info">
-                <div className="coll-meta">La Collezione Principale · Oxford</div>
-                <div className="coll-name">Il Derby Fiorentino</div>
-                <div className="coll-price">€ 895</div>
+          {products.map((item, index) => (
+            <div key={item.id} className={`coll-card reveal ${index > 0 ? `reveal-delay-${index % 3}` : ''}`}>
+              <div className="coll-visual" style={index === 0 ? { height: '680px' } : undefined}>
+                <a href={`/product/${item.handle}`} style={{ display: 'contents' }}>
+                  <img src={item.thumbnail} alt={item.title} className="img-luxe" />
+                  <div className="img-overlay-gradient"></div>
+                </a>
+                <div className="coll-info">
+                  <div className="coll-meta">{item.subtitle}</div>
+                  <div className="coll-name">{item.title}</div>
+                  <div className="coll-price">{item.price}</div>
+                </div>
               </div>
             </div>
-          </div>
-
-          <div className="coll-card reveal reveal-delay-1">
-            <div className="coll-visual">
-              <a href="/product/loafer" style={{ display: 'contents' }}>
-                <img src="/assets/loafer_romano.png" alt="Il Morsetto Romano" className="img-luxe" />
-                <div className="img-overlay-gradient"></div>
-              </a>
-              <div className="coll-info">
-                <div className="coll-meta">Penny Loafer · Vitello</div>
-                <div className="coll-name">Il Morsetto Romano</div>
-                <div className="coll-price">€ 720</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="coll-card reveal reveal-delay-2">
-            <div className="coll-visual">
-              <a href="/product/belt" style={{ display: 'contents' }}>
-                <img src="/assets/cintura_milano.png" alt="La Cintura Milano" className="img-luxe" />
-                <div className="img-overlay-gradient"></div>
-              </a>
-              <div className="coll-info">
-                <div className="coll-meta">Cintura · Full-Grain</div>
-                <div className="coll-name">La Cintura Milano</div>
-                <div className="coll-price">€ 285</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="coll-card reveal reveal-delay-1">
-            <div className="coll-visual">
-              <a href="/product/weekender" style={{ display: 'contents' }}>
-                <img src="/assets/weekender_bag.png" alt="Il Viaggio Veneziano" className="img-luxe" />
-                <div className="img-overlay-gradient"></div>
-              </a>
-              <div className="coll-info">
-                <div className="coll-meta">Borsa da Viaggio · Cuoio</div>
-                <div className="coll-name">Il Viaggio Veneziano</div>
-                <div className="coll-price">€ 1,480</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="coll-card reveal reveal-delay-2">
-            <div className="coll-visual">
-              <a href="/product/brogue" style={{ display: 'contents' }}>
-                <img src="/assets/brogue_shoe.png" alt="Il Brogue Britannico" className="img-luxe" />
-                <div className="img-overlay-gradient"></div>
-              </a>
-              <div className="coll-info">
-                <div className="coll-meta">Full Brogue · Vitello Verde</div>
-                <div className="coll-name">Il Brogue Britannico</div>
-                <div className="coll-price">€ 945</div>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
@@ -231,65 +180,22 @@ export default function Home() {
         </div>
 
         <div className="editorial-scroll">
-          <div className="ed-card">
-            <div className="ed-visual bg-derby">
-              <img src="/assets/hero_derby.png" alt="Il Derby Fiorentino" className="img-luxe" style={{ position: 'absolute', inset: 0 }} />
-            </div>
-            <div className="ed-card-info">
-              <div className="ed-tag">Oxford · Full-Grain Calfskin · Goodyear Welt</div>
-              <div className="ed-name">Il Derby<br />Fiorentino</div>
-              <div className="ed-sub">Firenze · Handcrafted 2025</div>
-              <div className="ed-footer">
-                <div className="ed-price">€ 895</div>
-                <button className="add-btn cart-add" data-id="derby">Add to Atelier</button>
+          {products.slice(0, 4).map((item) => (
+            <div key={`ed-${item.id}`} className="ed-card">
+              <div className="ed-visual">
+                <img src={item.thumbnail} alt={item.title} className="img-luxe" style={{ position: 'absolute', inset: 0 }} />
+              </div>
+              <div className="ed-card-info">
+                <div className="ed-tag">{item.subtitle}</div>
+                <div className="ed-name">{item.title}</div>
+                <div className="ed-sub">Handcrafted 2025</div>
+                <div className="ed-footer">
+                  <div className="ed-price">{item.price}</div>
+                  <button className="add-btn cart-add" data-id={item.id}>Add to Atelier</button>
+                </div>
               </div>
             </div>
-          </div>
-
-          <div className="ed-card">
-            <div className="ed-visual bg-loafer">
-              <img src="/assets/loafer_romano.png" alt="Il Morsetto Romano" className="img-luxe" style={{ position: 'absolute', inset: 0 }} />
-            </div>
-            <div className="ed-card-info">
-              <div className="ed-tag">Horsebit Loafer · Vitello Liscio</div>
-              <div className="ed-name">Il Morsetto<br />Romano</div>
-              <div className="ed-sub">Roma · Handcrafted 2025</div>
-              <div className="ed-footer">
-                <div className="ed-price">€ 720</div>
-                <button className="add-btn cart-add" data-id="loafer">Add to Atelier</button>
-              </div>
-            </div>
-          </div>
-
-          <div className="ed-card">
-            <div className="ed-visual bg-brogue">
-              <img src="/assets/brogue_shoe.png" alt="Il Brogue Britannico" className="img-luxe" style={{ position: 'absolute', inset: 0 }} />
-            </div>
-            <div className="ed-card-info">
-              <div className="ed-tag">Full Brogue · Vitello Verde Inglese</div>
-              <div className="ed-name">Il Brogue<br />Britannico</div>
-              <div className="ed-sub">Napoli · Handcrafted 2025</div>
-              <div className="ed-footer">
-                <div className="ed-price">€ 945</div>
-                <button className="add-btn cart-add" data-id="brogue">Add to Atelier</button>
-              </div>
-            </div>
-          </div>
-
-          <div className="ed-card">
-            <div className="ed-visual bg-weekender">
-              <img src="/assets/weekender_bag.png" alt="Il Viaggio Veneziano" className="img-luxe" style={{ position: 'absolute', inset: 0 }} />
-            </div>
-            <div className="ed-card-info">
-              <div className="ed-tag">Borsa Weekender · Cuoio Naturale</div>
-              <div className="ed-name">Il Viaggio<br />Veneziano</div>
-              <div className="ed-sub">Venezia · Handcrafted 2025</div>
-              <div className="ed-footer">
-                <div className="ed-price">€ 1,480</div>
-                <button className="add-btn cart-add" data-id="weekender">Add to Atelier</button>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
