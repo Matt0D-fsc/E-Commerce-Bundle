@@ -2,6 +2,7 @@
 import config from '@payload-config'
 import { RootPage, generatePageMetadata } from '@payloadcms/next/views'
 import { importMap } from '../importMap'
+import '@payloadcms/next/css'
 
 type Args = {
   params: Promise<{
