@@ -31,18 +31,22 @@ export async function getUnifiedProducts(): Promise<UnifiedProduct[]> {
     // 2. Fetch enriched data from Payload CMS Local API
     let payloadProductsMap: Record<string, any> = {}
     try {
-      const payload = await getPayload({ config })
-      const payloadDocs = await payload.find({
-        collection: 'products',
-        limit: 100,
-      })
-      payloadDocs.docs.forEach((doc: any) => {
-        if (doc.medusaId) {
-          payloadProductsMap[doc.medusaId] = doc
+      if (typeof window === 'undefined') {
+        const payload = await getPayload({ config })
+        if (payload && payload.find) {
+          const payloadDocs = await payload.find({
+            collection: 'products',
+            limit: 100,
+          })
+          payloadDocs.docs.forEach((doc: any) => {
+            if (doc.medusaId) {
+              payloadProductsMap[doc.medusaId] = doc
+            }
+          })
         }
-      })
+      }
     } catch (err) {
-      console.warn('Could not fetch Payload CMS docs (CMS might be initializing):', err)
+      console.warn('Payload CMS doc fetch deferred during startup.')
     }
 
     // If Medusa hasn't returned products yet (e.g. backend server starting up), return curated default items mapped to standard format

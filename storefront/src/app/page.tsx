@@ -342,7 +342,7 @@ export default async function Home() {
               <span className="cart-total-label">Total — 2 Pieces</span>
               <span className="cart-total-amount" id="cartTotal">€ 1,615</span>
             </div>
-            <button className="checkout-btn" onClick={() => window.location.href='/checkout'}>Proceed to Checkout</button>
+            <a href="/checkout" className="checkout-btn" style={{ display: 'block', textAlign: 'center', textDecoration: 'none' }}>Proceed to Checkout</a>
             <p className="cart-note">Complimentary dust bags · Worldwide insured delivery · Certificate of authenticity</p>
           </div>
         </div>
