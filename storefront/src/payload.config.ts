@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Products } from './collections/Products'
+import { Homepage } from './globals/Homepage'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -15,6 +16,7 @@ export default buildConfig({
     user: Users.slug,
   },
   collections: [Users, Media, Products],
+  globals: [Homepage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || 'payload-secret-maison-2026',
   typescript: {

@@ -1,8 +1,12 @@
 import Script from 'next/script';
 import { getUnifiedProducts } from '@/lib/products';
+import { getHomepageData } from '@/lib/homepage';
 
 export default async function Home() {
-  const products = await getUnifiedProducts();
+  const [products, content] = await Promise.all([
+    getUnifiedProducts(),
+    getHomepageData(),
+  ]);
 
   return (
     <>
@@ -32,19 +36,17 @@ export default async function Home() {
         <div className="hero-left">
           <div className="hero-texture"></div>
           <div style={{ position: 'relative', zIndex: 1 }}>
-            <p className="hero-eyebrow">Milano · Firenze · Napoli — Est. MMXII</p>
+            <p className="hero-eyebrow">{content.heroEyebrow}</p>
             <h1 className="hero-title">
-              Crafted<br />
-              <em>by hand,</em><br />
-              worn for<br />
-              generations.
+              {content.heroTitle.split(',').map((part, i) => (
+                <span key={i}>
+                  {i === 1 ? <em>{part.trim()}</em> : part.trim()}
+                  {i < content.heroTitle.split(',').length - 1 && <br />}
+                </span>
+              ))}
             </h1>
             <p className="hero-subtitle">
-              Each piece emerges from the same Florentine ateliers that dressed 
-              the <strong style={{ color: 'var(--tan)', fontWeight: 400 }}>Medici</strong>. 
-              Full-grain leather selected by our maestri, 
-              stitched with <strong style={{ color: 'var(--tan)', fontWeight: 400 }}>linen thread</strong> 
-              in the Goodyear tradition.
+              {content.heroSubtitle}
             </p>
             <div className="hero-cta">
               <button className="btn-primary" id="discoverBtn">
@@ -94,16 +96,9 @@ export default async function Home() {
       {/* MARQUEE */}
       <div className="marquee-strip">
         <div className="marquee-inner">
-          <span className="marquee-item">Full-Grain Florentine Leather</span>
-          <span className="marquee-item">Goodyear Welt Construction</span>
-          <span className="marquee-item">Hand-Stitched in Napoli</span>
-          <span className="marquee-item">Vegetable-Tanned Patina</span>
-          <span className="marquee-item">Made in Italia</span>
-          <span className="marquee-item">Full-Grain Florentine Leather</span>
-          <span className="marquee-item">Goodyear Welt Construction</span>
-          <span className="marquee-item">Hand-Stitched in Napoli</span>
-          <span className="marquee-item">Vegetable-Tanned Patina</span>
-          <span className="marquee-item">Made in Italia</span>
+          {content.marqueeItems.concat(content.marqueeItems).map((item, index) => (
+            <span key={index} className="marquee-item">{item}</span>
+          ))}
         </div>
       </div>
 
@@ -208,8 +203,8 @@ export default async function Home() {
           </div>
           <div className="craft-accent">
             <div className="craft-quote">
-              "La pelle non mente.<br />Ogni segno è una storia."
-              <cite>— Marco Ferrante, Maestro Calzolaio, Napoli</cite>
+              "{content.craftQuote}"
+              <cite>— {content.craftAuthor}</cite>
             </div>
           </div>
         </div>
